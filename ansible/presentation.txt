@@ -1,2 +1,0 @@
-- Gonna talk about ansible
-- Ansible is an task automation and configuration management tool that operates over ssh

@@ -1,0 +1,23 @@
+---
+-  include: example02.yml
+-  hosts: webservers
+   vars:
+     target_package_name: postgresql
+     db_name: ansible_demo_db
+     db_user: ansible_user
+   tasks:
+    - name: Say hi
+      shell: echo Hello from the other side
+    - name: Install postgres
+      yum:
+        name: {{ target_package_name }}
+        state: latest
+      sudo: yes
+    - name: Setup Postgres DB
+      postgresql_db:
+        name: {{ db_name }}
+      postgresql_user:
+        db: {{ db_name }}
+        name: {{ ansible_user }}
+        password: shhh_its_a_secret
+        role_attr_flags: CREATEDB,NOSUPERUSER

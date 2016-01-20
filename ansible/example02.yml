@@ -1,0 +1,10 @@
+---
+-  hosts: webservers
+   tasks:
+     - name: Say hi
+       shell: echo Hello from the other side
+     - name: Install yum utils
+       yum:
+         name: git
+         state: latest
+       sudo: yes

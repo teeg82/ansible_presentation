@@ -1,0 +1,28 @@
+Vagrant.configure("2") do |config|
+  # config.ssh.private_key_path = File.expand_path "../id_rsa_vagrant_ansible_testing", __FILE__
+
+  config.ssh.insert_key = false
+
+  config.vm.define "hdc1" do |hdc1|
+    # hdc1.ssh.username = "hdc1"
+    hdc1.vm.hostname = "hdc1"
+    hdc1.vm.network :private_network, ip: "192.168.44.2"
+    hdc1.vm.box = "centos7"
+    hdc1.vm.box_url = "https://f0fff3908f081cb6461b407be80daf97f07ac418.googledrive.com/host/0BwtuV7VyVTSkUG1PM3pCeDJ4dVE/centos7.box"
+    hdc1.vm.synced_folder "./hdc1", "/opt/hdc", type: "nfs"
+  end
+
+  config.vm.define "hdc2" do |hdc2|
+    # hdc2.ssh.username = "hdc2"
+    hdc2.vm.hostname = "hdc2"
+    hdc2.vm.network :private_network, ip: "192.168.44.3"
+    hdc2.vm.box = "centos7"
+    hdc2.vm.box_url = "https://f0fff3908f081cb6461b407be80daf97f07ac418.googledrive.com/host/0BwtuV7VyVTSkUG1PM3pCeDJ4dVE/centos7.box"
+    hdc2.vm.synced_folder "./hdc2", "/opt/hdc", type: "nfs"
+  end
+
+  # config.vm.provision :shell, inline: "cat /opt/hdc/id_rsa_vagrant_ansible_testing.pub >> /home/vagrant/.ssh/authorized_keys"
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "ansible/add_keys.yml"
+  end
+end

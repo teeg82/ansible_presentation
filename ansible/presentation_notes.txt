@@ -1,0 +1,58 @@
+- Gonna talk about ansible
+- Ansible is a simple and easy to use task automation.
+- Its chiefly geared towards application deployment and configuration management
+  - We have a system we want to deploy with a minimal of hassle
+  - We have dependencies we need to install. We have services that need to be setup and configured and run.
+  - We want or need to the application to be capable of handling itself in different environments (development, staging, production)
+  - And this must be done across multiple machines
+- It can also handle zero downtime rolling updates and continuous deployments
+
+
+
+ansible is an automation framework
+  chiefly an application deployment system
+  configuration management
+  ansible is SSH based
+    as such, don't need to install additional software on the remote entity
+  ad-hoc task execution (not a new thing but useful)
+  rolling updates and continuous deployment
+  Multi-tiered orchestration (flesh this out)
+
+Other task automation and configuration management tools:
+  puppet, chef, saltstack
+
+** Ansible documentation is some of the most clear and easy to understand documentation I've ever seen
+
+Use cases:
+  scenario in which you have a task or projec that requires repeatable processes and a consistent environment[1]
+  immutable server architecture
+    meaning, the ability to create, destroy and replace servers at any time without causing service disruptions
+      aka: rolling updates
+    makes ansible playbooks vendor-agnostic
+      a playbook can be used across different providers and custom datacenters with little or no changes to the playbook itself.
+
+Agentless!
+  Nodes are managed by executing commands through SSH as a transport channel to deploy modules
+    Commands aren't executed directly; ansible deploys small modules to remote nodes and runs those commands
+  avoids the problem of having cumbersome management software. There are no open daemons running on your infrastructure.
+    Aka no additional resources consumed.
+  SSH is very common; considered "stock"
+
+Ansible makes your life easier:
+  writing ansible is quick and easy. Writing ansible won't become anyone's day job
+  easy to read - can be read by people who don't know ansible
+  playbooks can be committed to source code repository
+  currently have a very large number of modules (postgres, django, python, yum, etc) ## GET NUMBER OF MODULES
+
+Ansible is open source
+  started about 3 years ago, took off very fast
+  #5 in 2013 for most number of contributors
+  very heavily supported, large group of contributors
+
+Misc notes:
+  ansible will try to manage all of the machines reference in a playbook in parallel [2]
+
+RESOURCES:
+
+[1] https://blog.serverdensity.com/what-ive-learnt-from-using-ansible-exclusively-for-2-years/
+[2] http://docs.ansible.com/ansible/playbooks_delegation.html#id1

@@ -1,10 +1,12 @@
 ---
--  hosts: webservers
-   tasks:
-     - name: Say hi
-       shell: echo Hello from the other side
-     - name: Install yum utils
-       yum:
-         name: git
-         state: latest
-       sudo: yes
+- name: Deploy our super cool django application!
+  hosts: webservers
+  vars:
+    project_repo: teeg82/ansible_presentation
+    project_name: super_cool_app
+  roles:
+    - python_stack
+    - django
+    - super_cool_application
+    - webserver
+    # - super_cool_application

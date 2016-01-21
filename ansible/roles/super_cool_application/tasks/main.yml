@@ -1,0 +1,16 @@
+---
+  - name: Pull application from git
+    git:
+      repo: "https://github.com/{{ project_repo }}"
+      version: master
+      dest: "{{ project_path }}"
+      accept_hostkey: yes
+  - name: Create app directory
+    file:
+      path: "{{ project_path }}/{{ project_name }}"
+      state: directory
+
+  - name: Move app to proper directory
+    command: "mv {{ project_path }}/ansible/django_example/hello_ansible {{project_path}}/{{project_name}}"
+    args:
+      creates: "{{project_path}}/{{project_name}}/hello_ansible/manage.py"

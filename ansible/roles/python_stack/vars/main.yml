@@ -1,0 +1,3 @@
+---
+HOME: /home/{{ ansible_user }}
+PY_VERSION: 2.7.6

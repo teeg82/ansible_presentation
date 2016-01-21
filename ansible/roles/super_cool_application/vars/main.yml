@@ -1,0 +1,3 @@
+---
+virtualenv_path: "/home/{{ ansible_user }}"
+project_path: "{{ virtualenv_path }}/{{ project_name }}"

@@ -1,11 +1,19 @@
-- Gonna talk about ansible
-- Ansible is a simple and easy to use task automation.
+- Something we use in CFPS is a tool called ansible
+- In a nuthshell, Ansible is a simple and easy to use task automation.
+- It started back in 2012, and it was created by a former RedHat engineer named Michael DeHaan
+- It seemed to very quickly gain popularity, and by around December 2013, in terms of number of forms and stars, it had surpassed all of its major competitors on github
+- Based on StackOverflow tags it also seemed to be gaining popularity there as well, surpassing SaltStack.
+  - Chef and puppet still had the lead, most likely because they're older technologies
 - Its chiefly geared towards application deployment and configuration management
-  - We have a system we want to deploy with a minimal of hassle
-  - We have dependencies we need to install. We have services that need to be setup and configured and run.
+  - We have a system, some kind of application you need to deploy, such as a web application, it has services & dependencies that need to be setup and configured, etc
+  - We want to do this with a minimal of hassle. Writing the deployment script, as Michael DeHaan has stated, "shouldn't be your day job"
+  - We want to do this safely and consistently
   - We want or need to the application to be capable of handling itself in different environments (development, staging, production)
   - And this must be done across multiple machines
-- It can also handle zero downtime rolling updates and continuous deployments
+  - It can also handle zero downtime rolling updates and continuous deployments
+  - It can also handle ad-hoc, one-time-or-limited-execution tasks for any other tasks
+
+- Currently has 463 modules listed on the ansible website.
 
 
 

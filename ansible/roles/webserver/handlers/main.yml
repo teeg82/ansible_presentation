@@ -1,0 +1,9 @@
+- name: start-nginx
+  service: state=started name=nginx
+  become: yes
+- name: stop-nginx
+  service: state=stop name=nginx
+  become: yes
+- name: restart-nginx
+  service: state=restarted name=nginx
+  become: yes

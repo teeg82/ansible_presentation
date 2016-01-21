@@ -1,0 +1,22 @@
+---
+  - name: Install centos release SCL
+    yum:
+      name: centos-release-scl
+      state: present
+    become: yes
+
+  - name: Install Python packages
+    yum:
+      name: "{{ item }}"
+      state: present
+    become: yes
+    with_items:
+      - python27
+      - python-pip
+    tags: packages
+
+  - name: Install virtualenv
+    pip:
+      name: virtualenv
+    become: yes
+    tags: packages

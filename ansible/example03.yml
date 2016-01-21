@@ -1,6 +1,6 @@
 ---
 -  include: example02.yml
--  hosts: webservers
+-  hosts: databases
    vars:
      target_package_name: postgresql
      db_name: ansible_demo_db
@@ -10,7 +10,7 @@
       shell: echo Hello from the other side
     - name: Install postgres
       yum:
-        name: {{ target_package_name }}
+        name: "{{ target_package_name }}"
         state: latest
       sudo: yes
     - name: Setup Postgres DB

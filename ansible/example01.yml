@@ -3,6 +3,12 @@
    tasks:
      - name: Say hi
        shell: echo Hello from the other side
-     - name: Install yum utils
-       shell: yum install yum-utils -y
-       sudo: yes
+       register: reply
+     - name: Show me what the server said
+       debug:
+         msg: "{{ reply }}"
+     - name: Install git with yum
+       yum:
+         name: git
+         state: latest
+       become: yes # equivalent to 'sudo'

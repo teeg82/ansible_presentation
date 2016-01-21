@@ -1,23 +1,55 @@
 ---
--  include: example02.yml
+-  include: example01.yml
 -  hosts: databases
    vars:
-     target_package_name: postgresql
      db_name: ansible_demo_db
      db_user: ansible_user
    tasks:
     - name: Say hi
       shell: echo Hello from the other side
-    - name: Install postgres
+
+    - name: Install centos release SCL
       yum:
-        name: "{{ target_package_name }}"
+        name: centos-release-scl
+        state: present
+      become: yes
+
+    - name: Install Python packages
+      yum:
+        name: "{{ item }}"
+        state: present
+      become: yes
+      with_items:
+        - python27
+        - python-psycopg2
+      tags: packages
+
+    - name: Install postgresql and server
+      yum:
+        name: "{{ item }}"
         state: latest
-      sudo: yes
+      become: yes
+      with_items:
+      - postgresql-server
+      - postgresql
+
+    - name: Init postgres
+      command: service postgresql initdb
+               creates=/var/lib/pgsql/data/postgresql.conf
+
+    - name: Start postgres
+      service:
+        name: postgresql
+        enabled: yes
+        state: started
+
     - name: Setup Postgres DB
       postgresql_db:
-        name: {{ db_name }}
+        name: "{{ db_name }}"
+
+    - name: Setup postgres User
       postgresql_user:
-        db: {{ db_name }}
-        name: {{ ansible_user }}
+        db: "{{ db_name }}"
+        name: "{{ ansible_user }}"
         password: shhh_its_a_secret
         role_attr_flags: CREATEDB,NOSUPERUSER

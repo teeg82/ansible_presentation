@@ -1,0 +1,51 @@
+Pauls-MacBook-Pro:ansible paulrichter$ ansible-playbook -i ansible_hosts example03.yml
+
+PLAY ***************************************************************************
+
+TASK [setup] *******************************************************************
+ok: [192.168.44.2]
+
+TASK [Say hi] ******************************************************************
+changed: [192.168.44.2]
+
+TASK [Show me what the server said] ********************************************
+ok: [192.168.44.2] => {
+    "msg": {
+        "changed": true,
+        "cmd": "echo Hello from the other side",
+        "delta": "0:00:00.003323",
+        "end": "2016-01-21 12:33:23.685160",
+        "rc": 0,
+        "start": "2016-01-21 12:33:23.681837",
+        "stderr": "",
+        "stdout": "Hello from the other side",
+        "stdout_lines": [
+            "Hello from the other side"
+        ],
+        "warnings": []
+    }
+}
+
+TASK [Install git with yum] ****************************************************
+ok: [192.168.44.2]
+
+PLAY ***************************************************************************
+
+TASK [setup] *******************************************************************
+ok: [192.168.44.3]
+
+TASK [Say hi] ******************************************************************
+changed: [192.168.44.3]
+
+TASK [Install centos release SCL] **********************************************
+ok: [192.168.44.3]
+
+TASK [Install Python packages] *************************************************
+ok: [192.168.44.3] => (item=[u'python27', u'python-psycopg2'])
+
+TASK [Init postgres] ***********************************************************
+fatal: [192.168.44.3]: FAILED! => {"changed": false, "cmd": "service postgresql initdb", "failed": true, "msg": "[Errno 2] No such file or directory", "rc": 2}
+
+PLAY RECAP *********************************************************************
+192.168.44.2               : ok=4    changed=1    unreachable=0    failed=0
+192.168.44.3               : ok=5    changed=2    unreachable=0    failed=1
